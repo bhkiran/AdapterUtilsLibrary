@@ -1,9 +1,9 @@
 buildscript {
     repositories {
-         mavenCentral()
+        mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.0.0'
+        classpath 'com.android.tools.build:gradle:1.1.0'
     }
 }
 
@@ -15,7 +15,7 @@ allprojects {
 apply plugin: 'com.android.library'
 android {
     compileSdkVersion 21
-    buildToolsVersion '21.1.1'
+    buildToolsVersion '21.1.2'
 
     defaultConfig {
         minSdkVersion 14
@@ -27,9 +27,21 @@ android {
             manifest.srcFile 'AndroidManifest.xml'
             java.srcDirs = ['src']
             res.srcDirs = ['res']
+            java {
+                exclude '**/MergeRecycleAdapter.java'
+            }
+        }
+    }
+    buildTypes {
+        debug {
+            minifyEnabled false
+        }
+        release {
+            minifyEnabled false
         }
     }
 }
 dependencies {
-    compile 'com.android.support:support-v4:21.0.2'
+    compile 'com.android.support:support-v4:21.0.3'
+    //compile 'com.android.support:recyclerview-v7:21.0.3'
 }

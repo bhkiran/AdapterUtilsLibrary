@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class MergeAdapter extends BaseAdapter implements SectionIndexer, IDestroyer, IScrollable {
-    protected ArrayList<BaseAdapter> mPieces = new ArrayList<BaseAdapter>(2);
+    protected final ArrayList<BaseAdapter> mPieces = new ArrayList<>();
     protected String noItemsText;
 
     /**
@@ -87,6 +87,36 @@ public class MergeAdapter extends BaseAdapter implements SectionIndexer, IDestro
         }
 
         return (null);
+    }
+
+    public ArrayList<BaseAdapter> getAdapters() {
+        return mPieces;
+    }
+
+    public boolean moveToFront(DexBaseAdapter adapter) {
+        boolean removed = mPieces.remove(adapter);
+        if (removed) {
+            mPieces.add(0, adapter);
+            notifyDataSetChanged();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean moveToPosition(DexBaseAdapter adapter, int position) {
+        try {
+            boolean removed = mPieces.remove(adapter);
+            if (removed) {
+                mPieces.add(position, adapter);
+                notifyDataSetChanged();
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @Override

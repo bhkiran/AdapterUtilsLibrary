@@ -41,7 +41,6 @@ public class TitleAdapter extends BaseAdapter implements IDexAdapter {
 		ID = id;
 		mIsEnabled = enabled;
 		mViewGen = viewGen;
-		mIsEnabled = enabled;
 	}
 
 	OnClickListener mItemClick;

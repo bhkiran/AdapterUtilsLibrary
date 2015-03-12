@@ -50,6 +50,36 @@ public class MergeExpandableAdapter<D extends DexExpandandableAdapter> extends B
         return null;
     }
 
+    public ArrayList<D> getAdapters() {
+        return mPieces;
+    }
+
+    public boolean moveToFront(D adapter) {
+        boolean removed = mPieces.remove(adapter);
+        if (removed) {
+            mPieces.add(0, adapter);
+            notifyDataSetChanged();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean moveToPosition(D adapter, int position) {
+        try {
+            boolean removed = mPieces.remove(adapter);
+            if (removed) {
+                mPieces.add(position, adapter);
+                notifyDataSetChanged();
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     @Override
     public int getGroupCount() {
         int total = 0;
